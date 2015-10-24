@@ -4,7 +4,7 @@ using System.Collections;
 public class Shooter : MonoBehaviour {
 
 	public GameObject bullet;
-	public float attackSpeed;
+	public float attackSpeed = 0.08f;
 
 	private bool canAtk;
 

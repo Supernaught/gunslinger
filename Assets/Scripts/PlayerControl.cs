@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
-	public float rotateSpeed;
-	private Shooter shooter;
+	public float rotateSpeed = 10;
+	Shooter shooter;
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +13,9 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey (KeyCode.RightArrow)){
-			shooter.AttemptAttack();
-		} else if (Input.GetKey (KeyCode.LeftArrow)) {
+//		if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey (KeyCode.RightArrow)){
+//			shooter.AttemptAttack();
+		 if (Input.GetKey (KeyCode.LeftArrow)) {
 			AttackLeft ();
 		} else if (Input.GetKey (KeyCode.RightArrow)) {
 			AttackRight();
@@ -23,12 +23,22 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void AttackLeft(){
-		transform.Rotate (new Vector3 (0, 0, 50 * rotateSpeed * Time.deltaTime));
+		float speed = (Input.GetKey (KeyCode.RightArrow)) ? rotateSpeed / 4 : rotateSpeed;
+		transform.Rotate (new Vector3 (0, 0, 50 * speed * Time.deltaTime));
 		shooter.AttemptAttack ();
 	}
 
 	void AttackRight(){
-		transform.Rotate (new Vector3 (0, 0, 50 * -rotateSpeed * Time.deltaTime));
+		float speed = (Input.GetKey (KeyCode.LeftArrow)) ? rotateSpeed / 4 : rotateSpeed;
+		transform.Rotate (new Vector3 (0, 0, 50 * -speed * Time.deltaTime));
 		shooter.AttemptAttack ();
+	}
+
+	void OnTriggerEnter2D(Collider2D col){
+		Die ();
+	}
+
+	void Die(){
+		Destroy (this.gameObject);
 	}
 }

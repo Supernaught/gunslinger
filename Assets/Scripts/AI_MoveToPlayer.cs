@@ -15,7 +15,7 @@ public class AI_MoveToPlayer : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(moveToPlayer){
+		if(player && moveToPlayer){
 			RotateToTarget(player.transform.position);
 			rb.velocity = transform.right * moveSpeed;
 		}
