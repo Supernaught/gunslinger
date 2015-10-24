@@ -5,13 +5,16 @@ public class AI_MoveToPlayer : MonoBehaviour {
 	GameObject player;
 	Rigidbody2D rb;
 	bool moveToPlayer;
-	public float rotateSpeed = 10;
-	public float moveSpeed = 2;
+	float rotateSpeed;
+	public float moveSpeed;
 
 	void Start () {
 		moveToPlayer = true;
 		rb = GetComponent<Rigidbody2D>();
 		player = GameObject.Find ("Player");
+
+		rotateSpeed = Random.Range (1, 10);
+		moveSpeed = Random.Range (4f, 7f);
 	}
 	
 	void Update () {

@@ -9,15 +9,10 @@ public class Shooter : MonoBehaviour {
 	private bool canAtk;
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 		canAtk = true;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void AttemptAttack(){
 		if (canAtk) {
 			Attack ();
@@ -26,11 +21,16 @@ public class Shooter : MonoBehaviour {
 
 	void Attack(){
 		Invoke ("EnableAttack", attackSpeed);
-		Instantiate (bullet, transform.position, Quaternion.Euler (transform.rotation.eulerAngles));
 		canAtk = false;
+
+		Fire ();
 	}
 
 	void EnableAttack(){
 		canAtk = true;
+	}
+
+	public virtual void Fire(){
+		Instantiate (bullet, transform.position + (transform.up * 0.7f), Quaternion.Euler (transform.rotation.eulerAngles));
 	}
 }
